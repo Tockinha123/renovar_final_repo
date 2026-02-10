@@ -1,0 +1,55 @@
+spring:
+  application:
+    name: renovarAPI
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+    url: jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}
+  
+  jpa:
+    hibernate:
+      ddl-auto: validate
+
+    show-sql: true
+
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  data:
+    web:
+      pageable:
+        default-page-size: 10
+        max-page-size: 100
+    
+  config:
+    import: optional:file:.env[.properties]
+
+  flyway:
+    encoding: UTF-8
+
+api:
+  security:
+    jwt:
+      secret: ${JWT_SECRET}
+      expiration-s: ${JWT_EXPIRATION_SEC}
+
+scalar:
+  page-title: Renovar API Documentation
+  theme: deep-space
+  dark-mode: true
+  layout: modern
+  path: scalar/docs/
+
+
+minio:
+  external-url: ${MINIO_EXTERNAL_URL}
+  url: ${MINIO_URL}
+  username: ${MINIO_USER}
+  password: ${MINIO_PASSWORD}
+  bucket: ${MINIO_BUCKET_REPORT}
+
+server:
+  forward-headers-strategy: framework
